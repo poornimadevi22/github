@@ -1,0 +1,48 @@
+CREATE TABLE `profile` (
+  `USER_ID` integer PRIMARY KEY,
+  `NAME` text,
+  `PHONE` integer,
+  `EMAIL_ID` text,
+  `BATCH` text,
+  `QUALIFICATION` text
+);
+
+CREATE TABLE `ATTEDANCE` (
+  `id` integer[primarykey],
+  `DATE` integer,
+  `PRESENT_DAYS` integer,
+  `DAYS_ABSENT` varchar(255),
+  `role` varchar(255),
+  `BATCH` text,
+  `created_at` timestamp
+);
+
+CREATE TABLE `CODEKATA` (
+  `id` integer PRIMARY KEY,
+  `TOTAL_SCORE` varchar(255),
+  `MAX_SCORE` varchar(255),
+  `PONITS` integer,
+  `DATE` integer
+);
+
+CREATE TABLE `WEBKATA` (
+  `id` integer PRIMARY KEY,
+  `TOTAL_SCORE` varchar(255),
+  `MAX_SCORE` varchar(255),
+  `PONITS` integer,
+  `DATE` integer
+);
+
+ALTER TABLE `profile` ADD FOREIGN KEY (`USER_ID`) REFERENCES `ATTEDANCE` (`id`);
+
+ALTER TABLE `ATTEDANCE` ADD FOREIGN KEY (`id`) REFERENCES `WEBKATA` (`id`);
+
+ALTER TABLE `ATTEDANCE` ADD FOREIGN KEY (`id`) REFERENCES `CODEKATA` (`id`);
+
+ALTER TABLE `ATTEDANCE` ADD FOREIGN KEY (`BATCH`) REFERENCES `profile` (`BATCH`);
+
+ALTER TABLE `CODEKATA` ADD FOREIGN KEY (`TOTAL_SCORE`) REFERENCES `WEBKATA` (`TOTAL_SCORE`);
+
+ALTER TABLE `CODEKATA` ADD FOREIGN KEY (`PONITS`) REFERENCES `WEBKATA` (`PONITS`);
+
+ALTER TABLE `CODEKATA` ADD FOREIGN KEY (`DATE`) REFERENCES `WEBKATA` (`DATE`);
